@@ -9,6 +9,23 @@
     --foreground: #ededed;
   }
 }
+::-webkit-scrollbar {
+  width: 2px; /* 垂直滚动条宽度 */
+  height: 2px; /* 水平滚动条高度 */
+}
+
+/* 滚动条轨道（背景） */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 轨道背景色 */
+  border-radius: 4px; /* 轨道圆角 */
+}
+
+/* 滚动条滑块（可拖动的部分） */
+::-webkit-scrollbar-thumb {
+  background: #ccc; /* 滑块默认颜色 */
+  border-radius: 4px; /* 滑块圆角 */
+  transition: background 0.2s; /*  hover 过渡效果 */
+}
 
 html,
 body {
@@ -39,4 +56,15 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.flex-c-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll-h {
+  height: 100%;
+  overflow-y: scroll;
 }

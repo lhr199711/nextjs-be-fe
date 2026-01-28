@@ -1,66 +1,48 @@
 'use client';
 import React from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
+import styles from './layoutcomp.module.css';
+import { useRouter } from 'next/navigation';
 
-const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`
-}));
-
-const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-  (icon, index) => {
-    const key = String(index + 1);
-
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
-      children: Array.from({ length: 4 }).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `option${subKey}`
-        };
-      })
-    };
+const menuList: MenuProps['items'] = [
+  {
+    key: 'book-manage',
+    label: `图书管理`,
+    children: [
+      { label: '图书列表', key: '/book/list' },
+      { label: '图书详情', key: '/book/detail' }
+    ]
   }
-);
+];
 
 export default function LayoutComp({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const menuClick: MenuProps['onClick'] = (e) => {
+    router.push(e.key);
+  };
   return (
     <Layout>
       <Layout.Header style={{ display: 'flex', alignItems: 'center' }}>
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={items1}
-          style={{ flex: 1, minWidth: 0 }}
-        />
+        <div className={styles.title}>图书管理系统</div>
       </Layout.Header>
       <Layout>
         <Layout.Sider width={200}>
           <Menu
             mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
+            defaultSelectedKeys={['/book/list']}
+            defaultOpenKeys={['book-manage']}
             style={{ height: '100%', borderInlineEnd: 0 }}
-            items={items2}
+            items={menuList}
+            onClick={menuClick}
           />
         </Layout.Sider>
-        <Layout style={{ padding: '0 24px 24px' }}>
-          <Breadcrumb
-            items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]}
-            style={{ margin: '16px 0' }}
-          />
+        <Layout style={{ padding: '16px' }}>
           <Layout.Content
             style={{
-              padding: 24,
+              padding: 0,
               margin: 0,
-              minHeight: 280
+              height: 'calc(100vh - 96px)'
             }}
           >
             {children}
