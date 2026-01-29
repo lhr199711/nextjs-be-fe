@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
       ? [
           {
             source: '/api/:path*',
-            destination: 'http://127.0.0.1:4523/m1/2411127-2980161-default/:path*'
+            destination: 'https://mock.apifox.cn/m1/2398938-0-default/api/:path*'
             // basePath: false
           }
         ]
