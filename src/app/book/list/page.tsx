@@ -1,14 +1,15 @@
 'use client';
 import bookApi from '@/api/book';
 import React, { useState, useEffect } from 'react';
-import { Button, Flex, Table, Image, Dropdown, Space } from 'antd';
+import { Button, Flex, Table, Image, Dropdown, Space, Form, Input } from 'antd';
 import type { TableColumnsType, TableProps, MenuProps } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
-import { BookItem } from '@/types/book';
+import { BookItem, BookListSearchData } from '@/types/book';
+import { useRouter } from 'next/navigation';
 
 type TableRowSelection<T extends object = object> = TableProps<T>['rowSelection'];
 
-const items: MenuProps['items'] = [
+const menuItems: MenuProps['items'] = [
   {
     label: '编辑',
     key: 'edit'
@@ -20,58 +21,8 @@ const items: MenuProps['items'] = [
   }
 ];
 
-const menuProps = {
-  items,
-  onClick: () => {}
-};
-
-const columns: TableColumnsType<BookItem> = [
-  { title: 'name', dataIndex: 'name' },
-  { title: 'author', dataIndex: 'author' },
-  {
-    title: 'description',
-    dataIndex: 'description',
-    render: (text: string) => (
-      <span
-        style={{
-          display: 'inline-block',
-          maxWidth: 150,
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          verticalAlign: 'middle'
-        }}
-        title={text}
-      >
-        {text}
-      </span>
-    )
-  },
-  { title: 'createdAt', dataIndex: 'createdAt' },
-  { title: 'publishAt', dataIndex: 'publishAt' },
-  {
-    title: 'cover',
-    dataIndex: 'cover',
-    render: (text) => <Image width={200} alt="basic" src={text} />
-  },
-  { title: 'stock', dataIndex: 'stock' },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space wrap>
-        <Space.Compact>
-          <Button type="primary">操作</Button>
-          <Dropdown menu={menuProps} placement="bottomRight">
-            <Button type="primary" icon={<EllipsisOutlined />} />
-          </Dropdown>
-        </Space.Compact>
-      </Space>
-    )
-  }
-];
-
 export default function Home() {
+  const router = useRouter();
   const [bookList, setBookList] = useState<BookItem[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [tableLoading, setTableLoading] = useState(false);
@@ -101,15 +52,96 @@ export default function Home() {
   }, []);
 
   return (
-    <Flex gap="middle" vertical>
-      <Flex align="center" gap="middle">
-        <Button type="primary">创建书籍</Button>
+    <Flex vertical>
+      <Flex>
+        <Button type="primary" onClick={() => router.push('/book/update/null')}>
+          创建书籍
+        </Button>
+        <Form
+          name="basic"
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          initialValues={{ remember: true }}
+          autoComplete="off"
+        >
+          <Space align="start">
+            <Form.Item<BookListSearchData> label="名称" name="name">
+              <Input />
+            </Form.Item>
+
+            <Form.Item<BookListSearchData> label="作者" name="author">
+              <Input />
+            </Form.Item>
+
+            <Form.Item<BookListSearchData> label="分类" name="category">
+              <Input />
+            </Form.Item>
+            <Space align="start">
+              <Button type="primary">搜索</Button>
+              <Button>清空</Button>
+            </Space>
+          </Space>
+        </Form>
       </Flex>
       <Table<BookItem>
         loading={tableLoading}
         scroll={{ y: 'calc(100vh - 250px)' }}
         rowSelection={rowSelection}
-        columns={columns}
+        columns={[
+          { title: 'name', dataIndex: 'name' },
+          { title: 'author', dataIndex: 'author' },
+          {
+            title: 'description',
+            dataIndex: 'description',
+            render: (text: string) => (
+              <span
+                style={{
+                  display: 'inline-block',
+                  maxWidth: 150,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  verticalAlign: 'middle'
+                }}
+                title={text}
+              >
+                {text}
+              </span>
+            )
+          },
+          { title: 'createdAt', dataIndex: 'createdAt' },
+          { title: 'publishAt', dataIndex: 'publishAt' },
+          {
+            title: 'cover',
+            dataIndex: 'cover',
+            render: (text) => <Image width={200} alt="basic" src={text} />
+          },
+          { title: 'stock', dataIndex: 'stock' },
+          {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+              <Space wrap>
+                <Space.Compact>
+                  <Button type="primary">操作</Button>
+                  <Dropdown
+                    menu={{
+                      items: menuItems,
+                      onClick: (item) => {
+                        if (item.key === 'edit') {
+                          router.push(`/book/update/${record._id}`);
+                        }
+                      }
+                    }}
+                    placement="bottomRight"
+                  >
+                    <Button type="primary" icon={<EllipsisOutlined />} />
+                  </Dropdown>
+                </Space.Compact>
+              </Space>
+            )
+          }
+        ]}
         dataSource={bookList}
       />
     </Flex>

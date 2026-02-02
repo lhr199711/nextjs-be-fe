@@ -10,3 +10,9 @@ export interface BookItem {
   stock: number; // 库存
   category: string; // 分类
 }
+
+export interface BookListSearchData {
+  name: string;
+  author: string;
+  category: string;
+}
