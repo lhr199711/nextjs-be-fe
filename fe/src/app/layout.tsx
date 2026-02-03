@@ -28,6 +28,11 @@ export default function RootLayout({
       if (!token) {
         router.push('/login');
       }
+    } else {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+      if (token) {
+        router.replace('/book/list');
+      }
     }
   }, [pathname]);
 
@@ -37,7 +42,7 @@ export default function RootLayout({
         {pathname !== '/login' && localStorage.getItem('token') && (
           <LayoutComp>{children}</LayoutComp>
         )}
-        {pathname === '/login' && <>{children}</>}
+        {pathname === '/login' && !localStorage.getItem('token') && <>{children}</>}
       </body>
     </html>
   );

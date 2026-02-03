@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 import type { MenuProps } from 'antd';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Dropdown, Space } from 'antd';
 import styles from './layoutcomp.module.css';
 import { useRouter } from 'next/navigation';
+import { DownOutlined } from '@ant-design/icons';
 
 const menuList: MenuProps['items'] = [
   {
@@ -24,7 +25,37 @@ export default function LayoutComp({ children }: { children: React.ReactNode }) 
   return (
     <Layout>
       <Layout.Header style={{ display: 'flex', alignItems: 'center' }}>
-        <div className={styles.title}>图书管理系统</div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%'
+          }}
+        >
+          <span className={styles.title}>图书管理系统</span>
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  label: '登出',
+                  key: '0',
+                  onClick: () => {
+                    localStorage.removeItem('token');
+                    router.push('/login');
+                  }
+                }
+              ]
+            }}
+          >
+            <a style={{ color: '#409eff' }} onClick={(e) => e.preventDefault()}>
+              <Space>
+                admin
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+        </div>
       </Layout.Header>
       <Layout>
         <Layout.Sider width={200}>
