@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
+const uri = "mongodb://localhost:27017/";
 
-const uri =
-  "mongodb+srv://harry:harry1997@cluster0.tmqvhdt.mongodb.net/?appName=Cluster0";
-
+import userSchema from "./userModel";
+import bookSchema from "./bookModel";
 async function main() {
   await mongoose.connect(uri);
 }
@@ -14,3 +14,6 @@ main()
   .catch((err) => {
     console.log("Connected to MongoDB failed");
   });
+
+export const User = mongoose.model("User", userSchema);
+export const Book = mongoose.model("Book", bookSchema);

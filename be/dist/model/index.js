@@ -3,8 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Book = exports.User = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const uri = "mongodb+srv://harry:harry1997@cluster0.tmqvhdt.mongodb.net/?appName=Cluster0";
+const uri = "mongodb://localhost:27017/";
+const userModel_1 = __importDefault(require("./userModel"));
+const bookModel_1 = __importDefault(require("./bookModel"));
 async function main() {
     await mongoose_1.default.connect(uri);
 }
@@ -15,4 +18,6 @@ main()
     .catch((err) => {
     console.log("Connected to MongoDB failed");
 });
+exports.User = mongoose_1.default.model("User", userModel_1.default);
+exports.Book = mongoose_1.default.model("Book", bookModel_1.default);
 //# sourceMappingURL=index.js.map

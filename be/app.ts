@@ -3,9 +3,9 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import { User } from "./model/index";
 
-// var indexRouter = require("./routes/index");
-// var usersRouter = require("./routes/users");
+import bookRouter from "./routes/book";
 
 var app = express();
 
@@ -19,8 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use("/", indexRouter);
-// app.use("/users", usersRouter);
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+// <---------------路由部分---------------->
+app.use("/book", bookRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -36,6 +40,10 @@ app.use(function (err: any, req: any, res: any, next: any) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+
+app.listen(3005, () => {
+  console.log("Server is running on port 3005");
 });
 
 module.exports = app;
