@@ -70,38 +70,29 @@ export declare const User: mongoose.Model<{
 }>;
 export declare const Book: mongoose.Model<{
     createdAt: string;
+    updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    publishAt?: number | null;
-    bookNo?: string | null;
     cover?: string | null;
-    stock?: number | null;
-    category?: string | null;
 }, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
     createdAt: string;
+    updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    publishAt?: number | null;
-    bookNo?: string | null;
     cover?: string | null;
-    stock?: number | null;
-    category?: string | null;
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
     createdAt: string;
+    updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    publishAt?: number | null;
-    bookNo?: string | null;
     cover?: string | null;
-    stock?: number | null;
-    category?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -110,36 +101,27 @@ export declare const Book: mongoose.Model<{
     id: string;
 }, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
     createdAt: string;
+    updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    publishAt?: number | null;
-    bookNo?: string | null;
     cover?: string | null;
-    stock?: number | null;
-    category?: string | null;
 }, mongoose.Document<unknown, {}, {
     createdAt: string;
+    updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    publishAt?: number | null;
-    bookNo?: string | null;
     cover?: string | null;
-    stock?: number | null;
-    category?: string | null;
 }, {
     id: string;
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
     createdAt: string;
+    updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    publishAt?: number | null;
-    bookNo?: string | null;
     cover?: string | null;
-    stock?: number | null;
-    category?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -151,26 +133,20 @@ export declare const Book: mongoose.Model<{
 } | {
     [x: string]: mongoose.SchemaDefinitionProperty<any, any, mongoose.Document<unknown, {}, {
         createdAt: string;
+        updatedAt: string;
         name?: string | null;
         author?: string | null;
         description?: string | null;
-        publishAt?: number | null;
-        bookNo?: string | null;
         cover?: string | null;
-        stock?: number | null;
-        category?: string | null;
     }, {
         id: string;
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
         createdAt: string;
+        updatedAt: string;
         name?: string | null;
         author?: string | null;
         description?: string | null;
-        publishAt?: number | null;
-        bookNo?: string | null;
         cover?: string | null;
-        stock?: number | null;
-        category?: string | null;
     } & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -180,28 +156,22 @@ export declare const Book: mongoose.Model<{
     }> | undefined;
 }, {
     createdAt: string;
+    updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    publishAt?: number | null;
-    bookNo?: string | null;
     cover?: string | null;
-    stock?: number | null;
-    category?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;
 }>, {
     createdAt: string;
+    updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    publishAt?: number | null;
-    bookNo?: string | null;
     cover?: string | null;
-    stock?: number | null;
-    category?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

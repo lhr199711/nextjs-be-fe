@@ -72,10 +72,6 @@ export default function Home() {
             <Form.Item<BookListSearchData> label="作者" name="author">
               <Input />
             </Form.Item>
-
-            <Form.Item<BookListSearchData> label="分类" name="category">
-              <Input />
-            </Form.Item>
             <Space align="start">
               <Button type="primary">搜索</Button>
               <Button>清空</Button>
@@ -88,10 +84,10 @@ export default function Home() {
         scroll={{ y: 'calc(100vh - 250px)' }}
         rowSelection={rowSelection}
         columns={[
-          { title: 'name', dataIndex: 'name' },
-          { title: 'author', dataIndex: 'author' },
+          { title: '书籍名', dataIndex: 'name' },
+          { title: '作者', dataIndex: 'author' },
           {
-            title: 'description',
+            title: '简介',
             dataIndex: 'description',
             render: (text: string) => (
               <span
@@ -109,14 +105,13 @@ export default function Home() {
               </span>
             )
           },
-          { title: 'createdAt', dataIndex: 'createdAt' },
-          { title: 'publishAt', dataIndex: 'publishAt' },
+          { title: '创建时间', dataIndex: 'createdAt' },
+          { title: '更新时间', dataIndex: 'updatedAt' },
           {
-            title: 'cover',
+            title: '书籍封面',
             dataIndex: 'cover',
             render: (text) => <Image width={200} alt="basic" src={text} />
           },
-          { title: 'stock', dataIndex: 'stock' },
           {
             title: 'Action',
             key: 'action',

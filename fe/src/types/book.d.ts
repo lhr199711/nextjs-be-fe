@@ -4,15 +4,11 @@ export interface BookItem {
   author: string;
   description: string;
   createdAt: string;
-  publishAt: number; // 出版日期
-  bookNo: string; // 图书编号
+  updatedAt: string;
   cover: string; // 封面
-  stock: number; // 库存
-  category: string; // 分类
 }
 
 export interface BookListSearchData {
   name: string;
   author: string;
-  category: string;
 }

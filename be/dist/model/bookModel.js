@@ -18,19 +18,11 @@ const bookSchema = new mongoose_1.default.Schema({
         type: String,
         default: Date.now(),
     },
-    publishAt: {
-        type: Number,
-    },
-    bookNo: {
+    updatedAt: {
         type: String,
+        default: Date.now(),
     },
     cover: {
-        type: String,
-    },
-    stock: {
-        type: Number,
-    },
-    category: {
         type: String,
     },
 });
