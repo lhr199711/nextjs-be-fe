@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
     res.send("Hello World");
 });
 // <---------------路由部分---------------->
-app.use("/book", book_1.default);
+app.use("/api/book", book_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next((0, http_errors_1.default)(404));

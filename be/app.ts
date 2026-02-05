@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 // <---------------路由部分---------------->
-app.use("/book", bookRouter);
+app.use("/api/book", bookRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

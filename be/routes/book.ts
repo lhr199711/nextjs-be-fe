@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
 import { Book } from "../model";
-
+import mongoose from "mongoose";
+const { ObjectId } = mongoose.Types;
 // 分页查询书籍
 router.get("/list", async function (req: any, res: any, next: any) {
-  console.log(req.query, "adwawdawdwa");
   const { current = 1, pageSize = 10, name, author } = req.query;
   const query: any = {};
   if (name) {
@@ -43,6 +43,11 @@ router.get("/list", async function (req: any, res: any, next: any) {
 router.post("/update", async function (req: any, res: any, next: any) {
   if (!req.body?._id) {
     await Book.db.collection("book").insertOne(req.body);
+  } else {
+    const { _id, ...other } = req.body; // 不能直接把_id带进去更改这个item
+    await Book.db
+      .collection("book")
+      .updateOne({ _id: new ObjectId(req.body._id) }, { $set: other });
   }
   return res.status(200).json({
     code: 200,
@@ -50,6 +55,25 @@ router.post("/update", async function (req: any, res: any, next: any) {
       message: "操作成功",
     },
   });
+});
+
+// 根据id查询书籍详情
+router.get("/detail/:id", async function (req: any, res: any, next: any) {
+  const { id } = req.params;
+  try {
+    const book = await Book.db
+      .collection("book")
+      .findOne({ _id: new ObjectId(id) });
+    if (!book) {
+      return res.status(404).json({ code: 404, message: "未找到对应书籍" });
+    }
+    return res.status(200).json({
+      code: 200,
+      data: book,
+    });
+  } catch (error) {
+    return res.status(500).json({ code: 500, message: "服务器错误", error });
+  }
 });
 
 export default router;

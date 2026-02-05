@@ -14,6 +14,15 @@ export default function UpdateBook() {
   const [form] = Form.useForm();
   const [imgUrl, setImgUrl] = useState(''); // https://pic1.zhimg.com/v2-d226d72450f0327264218a2cf5796113_r.jpg
 
+  useEffect(() => {
+    if (pageType === 'update') {
+      bookApi.getBookDetail(bookid).then((res) => {
+        form.setFieldsValue(res);
+        setImgUrl(res.cover);
+      });
+    }
+  }, []);
+
   return (
     <div>
       <PageHeader title={pageType === 'add' ? '新建书籍' : '编辑书籍'} />
@@ -25,17 +34,25 @@ export default function UpdateBook() {
           wrapperCol={{ span: 14 }}
           autoComplete="off"
           onFinish={(values) => {
+            let payload;
             if (pageType === 'add') {
-              let payload = {
+              payload = {
                 ...values,
                 createdAt: new Date(),
                 updatedAt: new Date()
               };
-              bookApi.updateBook(payload).then(() => {
-                messageApi.success('操作成功!');
-                router.back();
-              });
+            } else {
+              payload = {
+                ...values,
+                _id: bookid,
+                createdAt: new Date(),
+                updatedAt: new Date()
+              };
             }
+            bookApi.updateBook(payload).then(() => {
+              messageApi.success('操作成功!');
+              router.back();
+            });
           }}
         >
           <Form.Item
