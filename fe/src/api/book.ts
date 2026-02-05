@@ -1,9 +1,9 @@
-import axios from './request';
-import { BookItem, BookListSearchData } from '@/types/book';
+import { get, post } from './request';
+import { BookItem, BookListSearchData, BookListResult } from '@/types/book';
 
 const bookApi = {
-  getBookList: (params: BookListSearchData) => axios.get(`/list`, { params }),
-  updateBook: (data: BookItem) => axios.post(`/book/update`, data)
+  getBookList: (params: BookListSearchData) => get<BookListResult>(`/book/list`, { params }),
+  updateBook: (data: BookItem) => post(`/book/update`, data)
 };
 
 export default bookApi;

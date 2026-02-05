@@ -9,6 +9,13 @@ export interface BookItem {
 }
 
 export interface BookListSearchData {
-  name: string;
-  author: string;
+  name?: string;
+  author?: string;
+  current?: number;
+  pageSize?: number;
+}
+
+export interface BookListResult {
+  list: BookItem[];
+  total: number;
 }

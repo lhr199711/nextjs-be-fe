@@ -1,13 +1,11 @@
 'use client';
 import bookApi from '@/api/book';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button, Flex, Table, Image, Dropdown, Space, Form, Input } from 'antd';
 import type { TableColumnsType, TableProps, MenuProps } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { BookItem, BookListSearchData } from '@/types/book';
 import { useRouter } from 'next/navigation';
-
-type TableRowSelection<T extends object = object> = TableProps<T>['rowSelection'];
 
 const menuItems: MenuProps['items'] = [
   {
@@ -22,34 +20,38 @@ const menuItems: MenuProps['items'] = [
 ];
 
 export default function Home() {
+  const [form] = Form.useForm();
   const router = useRouter();
   const [bookList, setBookList] = useState<BookItem[]>([]);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [tableLoading, setTableLoading] = useState(false);
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection: TableRowSelection<BookItem> = {
-    selectedRowKeys,
-    onChange: onSelectChange
-  };
-
-  const getBookList = () => {
-    queueMicrotask(() => setTableLoading(true));
-    bookApi
-      .getBookList()
-      .then((res) => {
-        setBookList(res.data);
-      })
-      .finally(() => {
-        setTableLoading(false);
-      });
-  };
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: 0
+  });
+  const getBookList = useCallback(
+    (search?: BookListSearchData) => {
+      bookApi
+        .getBookList({ ...search, current: pagination.current, pageSize: pagination.pageSize })
+        .then((res) => {
+          setBookList(res.list || []);
+          setPagination((prev) => {
+            return {
+              ...prev,
+              total: res.total || 0
+            };
+          });
+        })
+        .finally(() => {
+          setTableLoading(false);
+        });
+    },
+    [pagination.current, pagination.pageSize]
+  );
 
   useEffect(() => {
     getBookList();
-  }, []);
+  }, [pagination.current, pagination.pageSize]);
 
   return (
     <Flex vertical>
@@ -58,6 +60,7 @@ export default function Home() {
           创建书籍
         </Button>
         <Form
+          form={form}
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
@@ -73,16 +76,22 @@ export default function Home() {
               <Input />
             </Form.Item>
             <Space align="start">
-              <Button type="primary">搜索</Button>
-              <Button>清空</Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  getBookList(form.getFieldsValue());
+                }}
+              >
+                搜索
+              </Button>
             </Space>
           </Space>
         </Form>
       </Flex>
+      {/* 分页器和total数据处理 */}
       <Table<BookItem>
         loading={tableLoading}
         scroll={{ y: 'calc(100vh - 250px)' }}
-        rowSelection={rowSelection}
         columns={[
           { title: '书籍名', dataIndex: 'name' },
           { title: '作者', dataIndex: 'author' },
@@ -110,7 +119,7 @@ export default function Home() {
           {
             title: '书籍封面',
             dataIndex: 'cover',
-            render: (text) => <Image width={200} alt="basic" src={text} />
+            render: (text) => <Image width={50} alt="basic" src={text} />
           },
           {
             title: 'Action',
@@ -129,6 +138,7 @@ export default function Home() {
                       }
                     }}
                     placement="bottomRight"
+                    // ... 其他props
                   >
                     <Button type="primary" icon={<EllipsisOutlined />} />
                   </Dropdown>
@@ -138,6 +148,20 @@ export default function Home() {
           }
         ]}
         dataSource={bookList}
+        pagination={{
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+          total: pagination.total,
+          showTotal: (total) => `共 ${total} 条`,
+          onChange: (page, pageSize) => {
+            setPagination((prev) => ({
+              ...prev,
+              current: page,
+              pageSize: pageSize
+            }));
+          }
+        }}
+        rowKey="_id"
       />
     </Flex>
   );

@@ -37,10 +37,9 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response: AxiosResponse) => {
     const res = response.data;
-
     // 如果后端有统一的 code 约定
     if (res && typeof res === 'object' && 'code' in res) {
-      if (res.code === 0) {
+      if (res.code === 200) {
         return res.data;
       }
       return Promise.reject(new Error(res.message || '请求失败'));
