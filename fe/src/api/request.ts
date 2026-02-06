@@ -62,6 +62,10 @@ export type ApiResponse<T> = {
   message?: string;
 };
 
+export function delete2<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  return service.delete<T, T>(url, config);
+}
+
 export function get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
   return service.get<T, T>(url, config);
 }

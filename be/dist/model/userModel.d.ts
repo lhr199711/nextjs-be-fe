@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 declare const userSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
     name: string;
-    nickName?: string | null;
+    password: string;
 }, mongoose.Document<unknown, {}, {
     name: string;
-    nickName?: string | null;
+    password: string;
 }, {
     id: string;
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
     name: string;
-    nickName?: string | null;
+    password: string;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -21,12 +21,12 @@ declare const userSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
 } | {
     [x: string]: mongoose.SchemaDefinitionProperty<any, any, mongoose.Document<unknown, {}, {
         name: string;
-        nickName?: string | null;
+        password: string;
     }, {
         id: string;
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
         name: string;
-        nickName?: string | null;
+        password: string;
     } & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -36,7 +36,7 @@ declare const userSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
     }> | undefined;
 }, {
     name: string;
-    nickName?: string | null;
+    password: string;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

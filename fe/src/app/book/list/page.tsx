@@ -1,7 +1,7 @@
 'use client';
 import bookApi from '@/api/book';
 import React, { useState, useEffect, useCallback } from 'react';
-import { Button, Flex, Table, Image, Dropdown, Space, Form, Input } from 'antd';
+import { Button, Flex, Table, Image, Dropdown, Space, Form, Input, Modal, message } from 'antd';
 import type { TableColumnsType, TableProps, MenuProps } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { BookItem, BookListSearchData } from '@/types/book';
@@ -29,6 +29,12 @@ export default function Home() {
     pageSize: 10,
     total: 0
   });
+  const handleDelete = (id: string) => {
+    bookApi.deleteBook(id).then(() => {
+      message.success('删除成功');
+      getBookList();
+    });
+  };
   const getBookList = useCallback(
     (search?: BookListSearchData) => {
       bookApi
@@ -134,6 +140,16 @@ export default function Home() {
                       onClick: (item) => {
                         if (item.key === 'edit') {
                           router.push(`/book/update/${record._id}`);
+                        } else if (item.key === 'delete') {
+                          Modal.confirm({
+                            title: '确定要删除这本书吗？',
+                            content: `书名：${record.name}`,
+                            okText: '确认',
+                            cancelText: '取消',
+                            onOk() {
+                              handleDelete(record._id as string);
+                            }
+                          });
                         }
                       }
                     }}

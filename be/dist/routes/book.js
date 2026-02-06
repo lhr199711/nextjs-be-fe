@@ -76,5 +76,19 @@ router.get("/detail/:id", async function (req, res, next) {
         return res.status(500).json({ code: 500, message: "服务器错误", error });
     }
 });
+// 删除书籍
+router.delete("/delete/:id", async function (req, res, next) {
+    const { id } = req.params;
+    try {
+        await model_1.Book.db.collection("book").deleteOne({ _id: new ObjectId(id) });
+        return res.status(200).json({
+            code: 200,
+            message: "删除成功",
+        });
+    }
+    catch (error) {
+        return res.status(500).json({ code: 500, message: "服务器错误", error });
+    }
+});
 exports.default = router;
 //# sourceMappingURL=book.js.map

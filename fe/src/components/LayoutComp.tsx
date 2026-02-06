@@ -10,10 +10,7 @@ const menuList: MenuProps['items'] = [
   {
     key: 'book-manage',
     label: `图书管理`,
-    children: [
-      { label: '图书列表', key: '/book/list' },
-      { label: '图书详情', key: '/book/detail' }
-    ]
+    children: [{ label: '图书列表', key: '/book/list' }]
   }
 ];
 

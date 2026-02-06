@@ -8,11 +8,15 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const userSchema = new mongoose_1.default.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true, // 用户名唯一
+        trim: true,
     },
-    nickName: {
+    password: {
         type: String,
-    }
+        required: true,
+        minlength: 6, // 密码最小长度
+    },
 });
 exports.default = userSchema;
 //# sourceMappingURL=userModel.js.map
