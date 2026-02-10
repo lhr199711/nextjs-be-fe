@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
-declare const userSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
-    name: string;
-    password: string;
-    role: string;
+declare const blockTokenSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
+    token: string;
+    userId: mongoose.Types.ObjectId;
+    expiresAt: NativeDate;
 }, mongoose.Document<unknown, {}, {
-    name: string;
-    password: string;
-    role: string;
+    token: string;
+    userId: mongoose.Types.ObjectId;
+    expiresAt: NativeDate;
 }, {
     id: string;
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
-    name: string;
-    password: string;
-    role: string;
+    token: string;
+    userId: mongoose.Types.ObjectId;
+    expiresAt: NativeDate;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -23,15 +23,15 @@ declare const userSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
     [path: string]: mongoose.SchemaDefinitionProperty<undefined, any, any>;
 } | {
     [x: string]: mongoose.SchemaDefinitionProperty<any, any, mongoose.Document<unknown, {}, {
-        name: string;
-        password: string;
-        role: string;
+        token: string;
+        userId: mongoose.Types.ObjectId;
+        expiresAt: NativeDate;
     }, {
         id: string;
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
-        name: string;
-        password: string;
-        role: string;
+        token: string;
+        userId: mongoose.Types.ObjectId;
+        expiresAt: NativeDate;
     } & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -40,13 +40,13 @@ declare const userSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
         id: string;
     }> | undefined;
 }, {
-    name: string;
-    password: string;
-    role: string;
+    token: string;
+    userId: mongoose.Types.ObjectId;
+    expiresAt: NativeDate;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;
 }>;
-export default userSchema;
-//# sourceMappingURL=userModel.d.ts.map
+export default blockTokenSchema;
+//# sourceMappingURL=blockToken.d.ts.map

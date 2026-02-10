@@ -29,12 +29,20 @@ const authMiddleware = async (req, res, next) => {
     try {
         // 2. 验证 Token 有效性
         const decoded = jsonwebtoken_1.default.verify(token, const_1.JWT_SECRET);
+        const findBlock = await model_1.BlockToken.findOne({ userId: decoded.id });
+        if (findBlock) {
+            return res.status(401).json({
+                code: 401,
+                message: "Token 已过期，请重新登录",
+            });
+        }
         // 3. 根据 Token 中的用户 ID 查询数据库（验证用户是否存在）
         const user = await model_1.User.findById(decoded.id).select("-password");
         if (!user) {
-            return res.status(401).json({
+            return res.status(400).json({
+                code: 400,
                 success: false,
-                message: "未授权：用户不存在",
+                message: "用户不存在",
             });
         }
         // 4. 将用户信息挂载到 req 对象，后续接口可直接使用

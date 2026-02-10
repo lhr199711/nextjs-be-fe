@@ -1,7 +1,7 @@
 const whiteList = ["/api/user/login", "/api/user/register"];
 import { JWT_SECRET } from "../util/const";
 import jwt from "jsonwebtoken";
-import { User } from "../model";
+import { User, BlockToken } from "../model";
 
 export const authMiddleware = async (req: any, res: any, next: any) => {
   // 白名单接口直接放行
@@ -31,13 +31,20 @@ export const authMiddleware = async (req: any, res: any, next: any) => {
     const decoded = jwt.verify(token, JWT_SECRET) as jwt.JwtPayload & {
       id: string;
     };
-
+    const findBlock = await BlockToken.findOne({ userId: decoded.id });
+    if (findBlock) {
+      return res.status(401).json({
+        code: 401,
+        message: "Token 已过期，请重新登录",
+      });
+    }
     // 3. 根据 Token 中的用户 ID 查询数据库（验证用户是否存在）
     const user = await User.findById(decoded.id).select("-password");
     if (!user) {
-      return res.status(401).json({
+      return res.status(400).json({
+        code: 400,
         success: false,
-        message: "未授权：用户不存在",
+        message: "用户不存在",
       });
     }
 

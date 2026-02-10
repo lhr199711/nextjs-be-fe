@@ -3,6 +3,7 @@ const uri = "mongodb://localhost:27017/";
 
 import userSchema from "./userModel";
 import bookSchema from "./bookModel";
+import blockTokenSchema from "./blockTokenModel";
 async function main() {
   await mongoose.connect(uri);
 }
@@ -17,3 +18,4 @@ main()
 
 export const User = mongoose.model("User", userSchema);
 export const Book = mongoose.model("Book", bookSchema);
+export const BlockToken = mongoose.model("BlockToken", blockTokenSchema);

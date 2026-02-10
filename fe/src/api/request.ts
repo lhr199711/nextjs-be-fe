@@ -51,7 +51,6 @@ service.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       window.localStorage.removeItem('token');
-      window.console.log(error.response);
       message.error(error.response?.data?.message);
       window.location.href = '/login';
     }

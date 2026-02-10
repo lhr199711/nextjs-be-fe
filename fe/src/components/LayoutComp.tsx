@@ -5,6 +5,7 @@ import { Layout, Menu, Dropdown, Space } from 'antd';
 import styles from './layoutcomp.module.css';
 import { useRouter } from 'next/navigation';
 import { DownOutlined } from '@ant-design/icons';
+import api from '@/api/login';
 
 const menuList: MenuProps['items'] = [
   {
@@ -38,8 +39,10 @@ export default function LayoutComp({ children }: { children: React.ReactNode }) 
                   label: '登出',
                   key: '0',
                   onClick: () => {
-                    localStorage.removeItem('token');
-                    router.push('/login');
+                    api.logout().then(() => {
+                      localStorage.removeItem('token');
+                      router.push('/login');
+                    });
                   }
                 }
               ]

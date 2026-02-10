@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
-// const { ObjectId } = mongoose.Types;
-// import mongoose from "mongoose";
-import { User } from "../model";
+import mongoose from "mongoose";
+import { User, BlockToken } from "../model";
 import { generateToken, verifyToken } from "../util/token";
+const { ObjectId } = mongoose.Types;
 
 router.post("/register", async function (req: any, res: any, next: any) {
   const { name, password } = req.body;
@@ -49,6 +49,7 @@ router.post("/login", async (req: any, res: any) => {
         .status(401)
         .json({ code: 401, success: false, message: "用户名/密码错误" });
     }
+    await BlockToken.findOneAndDelete({ userId: new ObjectId(user._id) });
     // 登录成功，返回 Token
     return res.status(200).json({
       code: 200,
@@ -65,4 +66,43 @@ router.post("/login", async (req: any, res: any) => {
   }
 });
 
+router.post("/logout", async (req: any, res: any) => {
+  // 通过header的token解析出用户id
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({
+      code: 401,
+      success: false,
+      message: "未授权：请先登录获取 Token",
+    });
+  }
+  const token = authHeader.split(" ")[1];
+  let userId: any;
+  try {
+    // 如果有专门的jwt变量名则导入或用此
+    const decoded: any = verifyToken(token);
+    userId = decoded.id;
+    if (!userId) {
+      return res.status(401).json({
+        code: 401,
+        success: false,
+        message: "未授权：Token 无效",
+      });
+    } else {
+      const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24);
+      await BlockToken.create({ token, userId, expiresAt });
+      return res.status(200).json({
+        code: 200,
+        message: "登出成功",
+      });
+    }
+  } catch (err: any) {
+    return res.status(401).json({
+      code: 401,
+      success: false,
+      message: "未授权：Token 校验失败",
+    });
+  }
+  // 查询用户
+});
 export default router;

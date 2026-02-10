@@ -2,22 +2,7 @@
 import mongoose from "mongoose";
 const bcrypt = require("bcryptjs");
 
-interface IUser {
-  name: string;
-  password: string;
-  role: string;
-}
-
-// 实例方法类型（matchPassword 会出现在 document 上）
-interface IUserMethods {
-  matchPassword(enteredPassword: string): Promise<boolean>;
-}
-
-const userSchema = new mongoose.Schema<
-  IUser,
-  mongoose.Model<IUser, {}, IUserMethods>,
-  IUserMethods
->({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
