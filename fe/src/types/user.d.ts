@@ -4,3 +4,5 @@ export interface UserItem {
   password: string;
   password2?: string;
 }
+
+export type LoginRes = { token: string };

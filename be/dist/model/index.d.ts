@@ -2,16 +2,19 @@ import mongoose from "mongoose";
 export declare const User: mongoose.Model<{
     name: string;
     password: string;
+    role: string;
 }, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
     name: string;
     password: string;
+    role: string;
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
     name: string;
     password: string;
+    role: string;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -21,14 +24,17 @@ export declare const User: mongoose.Model<{
 }, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
     name: string;
     password: string;
+    role: string;
 }, mongoose.Document<unknown, {}, {
     name: string;
     password: string;
+    role: string;
 }, {
     id: string;
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
     name: string;
     password: string;
+    role: string;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -41,11 +47,13 @@ export declare const User: mongoose.Model<{
     [x: string]: mongoose.SchemaDefinitionProperty<any, any, mongoose.Document<unknown, {}, {
         name: string;
         password: string;
+        role: string;
     }, {
         id: string;
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
         name: string;
         password: string;
+        role: string;
     } & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -56,6 +64,7 @@ export declare const User: mongoose.Model<{
 }, {
     name: string;
     password: string;
+    role: string;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -63,6 +72,7 @@ export declare const User: mongoose.Model<{
 }>, {
     name: string;
     password: string;
+    role: string;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

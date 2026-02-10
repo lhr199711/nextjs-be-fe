@@ -4,6 +4,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig
 } from 'axios';
+import { message } from 'antd';
 
 // 基础地址可以通过环境变量配置
 // 在 .env.local 中配置：NEXT_PUBLIC_API_BASE_URL=http://localhost:3000/api
@@ -39,19 +40,24 @@ service.interceptors.response.use(
     const res = response.data;
     // 如果后端有统一的 code 约定
     if (res && typeof res === 'object' && 'code' in res) {
-      if (res.code === 200) {
-        return res.data;
+      if (res.code * 1 === 200) {
+        return res?.data || res;
       }
       return Promise.reject(new Error(res.message || '请求失败'));
+    } else {
+      return res;
     }
-
-    // 否则直接返回 data
-    return res;
   },
   (error) => {
+    if (error.response.status === 401) {
+      window.localStorage.removeItem('token');
+      window.console.log(error.response);
+      message.error(error.response?.data?.message);
+      window.location.href = '/login';
+    }
     // 这里可以接入 antd 的 message 提示等
     // message.error(error.response?.data?.message || error.message)
-    return Promise.reject(error);
+    return Promise.reject(error.response?.data);
   }
 );
 

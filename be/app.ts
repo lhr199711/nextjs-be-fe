@@ -3,6 +3,7 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import { authMiddleware } from "./middleware/auth";
 
 var app = express();
 
@@ -14,6 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// 中间件 必须在路由前
+app.use(authMiddleware);
 
 // <---------------路由部分---------------->
 import bookRouter from "./routes/book";

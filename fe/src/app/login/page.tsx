@@ -1,9 +1,9 @@
 'use client';
 import api from '@/api/login';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Form, Input, Button, Card, message, Tabs } from 'antd';
 import { useRouter } from 'next/navigation';
-import { UserItem } from '@/types/user';
+import { LoginRes, UserItem } from '@/types/user';
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
@@ -17,6 +17,7 @@ export default function LoginPage() {
       ? { name: '', password: '' }
       : { name: '', password: '', password2: '' };
   }, [tabKey]);
+
   const handleSubmit = () => {
     if (tabKey === 'register') {
       form.validateFields().then((values) => {
@@ -26,7 +27,7 @@ export default function LoginPage() {
             setTabKey('login');
             messageApi.open({
               type: 'success',
-              content: '注册成功'
+              content: '注册成功，请登录'
             });
           })
           .catch((err) => {
@@ -37,73 +38,89 @@ export default function LoginPage() {
           });
       });
     } else {
-      window.localStorage.setItem('token', '123456');
-      messageApi.open({
-        type: 'success',
-        content: '登录成功'
+      form.validateFields().then((values) => {
+        api
+          .login({ name: values.name, password: values.password })
+          .then((res: LoginRes) => {
+            window.localStorage.setItem('token', res.token);
+            messageApi.open({
+              type: 'success',
+              content: '登录成功'
+            });
+            router.push('/book/list');
+          })
+          .catch((err) => {
+            messageApi.open({
+              type: 'error',
+              content: err.message
+            });
+          });
       });
-      router.push('/book/list');
     }
   };
   const tabChange = (key: string) => {
     setTabKey(key);
   };
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#f0f2f5'
-      }}
-    >
-      <Card style={{ width: 500 }}>
-        <Tabs
-          onChange={tabChange}
-          type="card"
-          items={[
-            {
-              key: 'login',
-              label: '登录'
-            },
-            {
-              key: 'register',
-              label: '注册'
-            }
-          ]}
-        />
-        <Form onFinish={handleSubmit} form={form} layout="vertical" initialValues={formItems}>
-          <Form.Item<UserItem>
-            name="name"
-            label="用户名"
-            rules={[{ required: true, message: '请输入用户名' }]}
-          >
-            <Input placeholder="请输入用户名" autoComplete="name" />
-          </Form.Item>
-          <Form.Item<UserItem>
-            name="password"
-            label="密码"
-            rules={[{ required: true, message: '请输入密码' }]}
-          >
-            <Input.Password placeholder="请输入密码" autoComplete="current-password" />
-          </Form.Item>
-          {tabKey === 'register' && (
+    <>
+      {contextHolder}
+      <div
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#f0f2f5'
+        }}
+      >
+        <Card style={{ width: 500 }}>
+          <Tabs
+            onChange={tabChange}
+            type="card"
+            items={[
+              {
+                key: 'login',
+                label: '登录'
+              },
+              {
+                key: 'register',
+                label: '注册'
+              }
+            ]}
+          />
+
+          <Form form={form} layout="vertical" initialValues={formItems}>
             <Form.Item<UserItem>
-              name="password2"
-              label="确认密码"
+              name="name"
+              label="用户名"
+              rules={[{ required: true, message: '请输入用户名' }]}
+            >
+              <Input placeholder="请输入用户名" autoComplete="name" />
+            </Form.Item>
+            <Form.Item<UserItem>
+              name="password"
+              label="密码"
               rules={[{ required: true, message: '请输入密码' }]}
             >
               <Input.Password placeholder="请输入密码" autoComplete="current-password" />
             </Form.Item>
-          )}
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block loading={loading}>
-              {tabKey === 'register' ? '注册' : '登录'}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </div>
+            {tabKey === 'register' && (
+              <Form.Item<UserItem>
+                name="password2"
+                label="确认密码"
+                rules={[{ required: true, message: '请输入密码' }]}
+              >
+                <Input.Password placeholder="请输入密码" autoComplete="current-password" />
+              </Form.Item>
+            )}
+            <Form.Item>
+              <Button type="primary" onClick={handleSubmit} block loading={loading}>
+                {tabKey === 'register' ? '注册' : '登录'}
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </div>
+    </>
   );
 }

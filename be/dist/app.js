@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
+const auth_1 = require("./middleware/auth");
 var app = (0, express_1.default)();
 // view engine setup
 app.set("views", path_1.default.join(__dirname, "views"));
@@ -17,6 +18,8 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
+// 中间件 必须在路由前
+app.use(auth_1.authMiddleware);
 // <---------------路由部分---------------->
 const book_1 = __importDefault(require("./routes/book"));
 app.use("/api/book", book_1.default);
