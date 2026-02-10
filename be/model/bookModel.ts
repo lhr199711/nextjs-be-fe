@@ -18,9 +18,6 @@ const bookSchema = new mongoose.Schema({
     type: String,
     default: Date.now(),
   },
-  cover: {
-    type: String,
-  },
 });
 
 export default bookSchema;

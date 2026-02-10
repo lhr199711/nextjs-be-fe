@@ -1,1 +1,1 @@
-{"version":3,"file":"bookModel.d.ts","sourceRoot":"","sources":["../../model/bookModel.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,UAAU,CAAC;AAEhC,QAAA,MAAM,UAAU;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAqBd,CAAC;AAEH,eAAe,UAAU,CAAC"}
+{"version":3,"file":"bookModel.d.ts","sourceRoot":"","sources":["../../model/bookModel.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,UAAU,CAAC;AAEhC,QAAA,MAAM,UAAU;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAkBd,CAAC;AAEH,eAAe,UAAU,CAAC"}

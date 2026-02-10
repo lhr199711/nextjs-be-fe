@@ -5,7 +5,6 @@ export interface BookItem {
   description: string;
   createdAt: string;
   updatedAt: string;
-  cover: string; // 封面
 }
 
 export interface BookListSearchData {

@@ -10,8 +10,11 @@ import api from '@/api/login';
 const menuList: MenuProps['items'] = [
   {
     key: 'book-manage',
-    label: `图书管理`,
-    children: [{ label: '图书列表', key: '/book/list' }]
+    label: `书籍管理`,
+    children: [
+      { label: '已读书目', key: '/book/list' },
+      { label: '想读书目', key: '/book/wishlist' }
+    ]
   }
 ];
 
@@ -31,7 +34,7 @@ export default function LayoutComp({ children }: { children: React.ReactNode }) 
             width: '100%'
           }}
         >
-          <span className={styles.title}>图书管理系统</span>
+          <span className={styles.title}>Harry的成长之路</span>
           <Dropdown
             menu={{
               items: [

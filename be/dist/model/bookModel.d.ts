@@ -5,14 +5,12 @@ declare const bookSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    cover?: string | null;
 }, mongoose.Document<unknown, {}, {
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    cover?: string | null;
 }, {
     id: string;
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
@@ -21,7 +19,6 @@ declare const bookSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    cover?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -37,7 +34,6 @@ declare const bookSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
         name?: string | null;
         author?: string | null;
         description?: string | null;
-        cover?: string | null;
     }, {
         id: string;
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
@@ -46,7 +42,6 @@ declare const bookSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
         name?: string | null;
         author?: string | null;
         description?: string | null;
-        cover?: string | null;
     } & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -60,7 +55,6 @@ declare const bookSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    cover?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

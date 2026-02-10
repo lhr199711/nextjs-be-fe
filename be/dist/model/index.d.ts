@@ -82,27 +82,24 @@ export declare const Book: mongoose.Model<{
     createdAt: string;
     updatedAt: string;
     name?: string | null;
-    description?: string | null;
     author?: string | null;
-    cover?: string | null;
+    description?: string | null;
 }, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
     createdAt: string;
     updatedAt: string;
     name?: string | null;
-    description?: string | null;
     author?: string | null;
-    cover?: string | null;
+    description?: string | null;
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
     createdAt: string;
     updatedAt: string;
     name?: string | null;
-    description?: string | null;
     author?: string | null;
-    cover?: string | null;
+    description?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -113,25 +110,22 @@ export declare const Book: mongoose.Model<{
     createdAt: string;
     updatedAt: string;
     name?: string | null;
-    description?: string | null;
     author?: string | null;
-    cover?: string | null;
+    description?: string | null;
 }, mongoose.Document<unknown, {}, {
     createdAt: string;
     updatedAt: string;
     name?: string | null;
-    description?: string | null;
     author?: string | null;
-    cover?: string | null;
+    description?: string | null;
 }, {
     id: string;
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
     createdAt: string;
     updatedAt: string;
     name?: string | null;
-    description?: string | null;
     author?: string | null;
-    cover?: string | null;
+    description?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -145,18 +139,16 @@ export declare const Book: mongoose.Model<{
         createdAt: string;
         updatedAt: string;
         name?: string | null;
-        description?: string | null;
         author?: string | null;
-        cover?: string | null;
+        description?: string | null;
     }, {
         id: string;
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
         createdAt: string;
         updatedAt: string;
         name?: string | null;
-        description?: string | null;
         author?: string | null;
-        cover?: string | null;
+        description?: string | null;
     } & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -168,9 +160,8 @@ export declare const Book: mongoose.Model<{
     createdAt: string;
     updatedAt: string;
     name?: string | null;
-    description?: string | null;
     author?: string | null;
-    cover?: string | null;
+    description?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -179,9 +170,8 @@ export declare const Book: mongoose.Model<{
     createdAt: string;
     updatedAt: string;
     name?: string | null;
-    description?: string | null;
     author?: string | null;
-    cover?: string | null;
+    description?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

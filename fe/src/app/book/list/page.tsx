@@ -123,11 +123,6 @@ export default function Home() {
           { title: '创建时间', dataIndex: 'createdAt' },
           { title: '更新时间', dataIndex: 'updatedAt' },
           {
-            title: '书籍封面',
-            dataIndex: 'cover',
-            render: (text) => <Image width={50} alt="basic" src={text} />
-          },
-          {
             title: 'Action',
             key: 'action',
             render: (_, record) => (

@@ -12,13 +12,11 @@ export default function UpdateBook() {
   const [messageApi, contextHolder] = message.useMessage();
   const pageType = useMemo(() => (bookid === 'null' ? 'add' : 'update'), [bookid]);
   const [form] = Form.useForm();
-  const [imgUrl, setImgUrl] = useState(''); // https://pic1.zhimg.com/v2-d226d72450f0327264218a2cf5796113_r.jpg
 
   useEffect(() => {
     if (pageType === 'update') {
       bookApi.getBookDetail(bookid).then((res) => {
         form.setFieldsValue(res);
-        setImgUrl(res.cover);
       });
     }
   }, []);
@@ -28,10 +26,9 @@ export default function UpdateBook() {
       <PageHeader title={pageType === 'add' ? '新建书籍' : '编辑书籍'} />
       <div>
         <Form
+          labelCol={{ style: { width: 120 } }}
           form={form}
           name="bookForm"
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 14 }}
           autoComplete="off"
           onFinish={(values) => {
             let payload;
@@ -62,36 +59,19 @@ export default function UpdateBook() {
           >
             <Input placeholder="请输入书籍名称" />
           </Form.Item>
-          <Form.Item
-            label="书籍分类"
-            name="category"
-            rules={[{ required: true, message: '请输入书籍分类' }]}
-          >
-            <Input placeholder="请输入书籍名称" />
-          </Form.Item>
           <Form.Item label="作者" name="author" rules={[{ required: true, message: '请输入作者' }]}>
             <Input placeholder="请输入作者" />
           </Form.Item>
 
           <Form.Item
-            label="封面链接"
-            name="cover"
-            rules={[{ required: true, message: '请输入封面图片URL' }]}
+            label="简介"
+            name="description"
+            rules={[{ required: true, message: '这本书到底在讲什么？' }]}
           >
-            <Input
-              placeholder="请输入封面图片URL"
-              onBlur={() => {
-                const cover = form.getFieldValue('cover');
-                setImgUrl(cover);
-              }}
+            <Input.TextArea
+              placeholder="这本书到底在讲什么？"
+              autoSize={{ minRows: 3, maxRows: 6 }}
             />
-          </Form.Item>
-          <Form.Item label="封面预览">
-            <Image width={200} alt="basic" src={imgUrl} />
-          </Form.Item>
-
-          <Form.Item label="简介" name="description">
-            <Input.TextArea placeholder="请输入书籍简介" autoSize={{ minRows: 3, maxRows: 6 }} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
             <Button type="primary" htmlType="submit">

@@ -22,9 +22,6 @@ const bookSchema = new mongoose_1.default.Schema({
         type: String,
         default: Date.now(),
     },
-    cover: {
-        type: String,
-    },
 });
 exports.default = bookSchema;
 //# sourceMappingURL=bookModel.js.map
