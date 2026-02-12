@@ -34,7 +34,7 @@ export default function LayoutComp({ children }: { children: React.ReactNode }) 
             width: '100%'
           }}
         >
-          <span className={styles.title}>Harry的成长之路</span>
+          <span className={styles.title}>Paas-web</span>
           <Dropdown
             menu={{
               items: [
@@ -75,8 +75,7 @@ export default function LayoutComp({ children }: { children: React.ReactNode }) 
           <Layout.Content
             style={{
               padding: 0,
-              margin: 0,
-              height: 'calc(100vh - 96px)'
+              margin: 0
             }}
           >
             {children}

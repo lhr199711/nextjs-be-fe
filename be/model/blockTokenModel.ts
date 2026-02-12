@@ -10,6 +10,7 @@ const blockTokenSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
+    
     ref: "User", // 关联用户表（如有User模型）
   },
   // 过期时间（配置TTL索引，自动删除过期记录）

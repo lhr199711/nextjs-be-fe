@@ -17,22 +17,6 @@ const bookSchema = new mongoose_1.default.Schema({
     topic: {
         type: String,
     },
-    what: {
-        type: String,
-    },
-    how: {
-        type: String,
-    },
-    think: {
-        type: String,
-    },
-    why: {
-        type: String,
-    },
-    customData: {
-        type: Object,
-        default: () => ({}),
-    },
     createdAt: {
         type: String,
         default: Date.now(),
@@ -43,4 +27,4 @@ const bookSchema = new mongoose_1.default.Schema({
     },
 });
 exports.default = bookSchema;
-//# sourceMappingURL=bookModel.js.map
+//# sourceMappingURL=bookModel%20copy.js.map

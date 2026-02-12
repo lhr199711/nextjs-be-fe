@@ -5,13 +5,13 @@ import mongoose from "mongoose";
 const { ObjectId } = mongoose.Types;
 // 分页查询书籍
 router.get("/list", async function (req: any, res: any, next: any) {
-  const { current = 1, pageSize = 10, name, author } = req.query;
+  const { current = 1, pageSize = 10, name, topic } = req.query;
   const query: any = {};
   if (name) {
     query.name = { $regex: name, $options: "i" };
   }
-  if (author) {
-    query.author = { $regex: author, $options: "i" };
+  if (topic) {
+    query.topic = { $regex: topic, $options: "i" };
   }
 
   const skip = (parseInt(current) - 1) * parseInt(pageSize);

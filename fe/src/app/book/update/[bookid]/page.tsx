@@ -1,11 +1,11 @@
 'use client';
 import bookApi from '@/api/book';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import { Button, Flex, Table, Image, Dropdown, Space, Form, Input, message } from 'antd';
 import { useRouter } from 'next/navigation';
-
+import AntdGraph from './components/AntdGraph';
 export default function UpdateBook() {
   const router = useRouter();
   const { bookid } = useParams();
@@ -14,12 +14,12 @@ export default function UpdateBook() {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    if (pageType === 'update') {
+    if (pageType === 'update' && bookid && typeof bookid === 'string') {
       bookApi.getBookDetail(bookid).then((res) => {
         form.setFieldsValue(res);
       });
     }
-  }, []);
+  }, [pageType, bookid, form]);
 
   return (
     <div>
@@ -72,6 +72,9 @@ export default function UpdateBook() {
               placeholder="这本书到底在讲什么？"
               autoSize={{ minRows: 3, maxRows: 6 }}
             />
+          </Form.Item>
+          <Form.Item label="思维导图" name="description">
+            <AntdGraph />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
             <Button type="primary" htmlType="submit">

@@ -10,13 +10,13 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const { ObjectId } = mongoose_1.default.Types;
 // 分页查询书籍
 router.get("/list", async function (req, res, next) {
-    const { current = 1, pageSize = 10, name, author } = req.query;
+    const { current = 1, pageSize = 10, name, topic } = req.query;
     const query = {};
     if (name) {
         query.name = { $regex: name, $options: "i" };
     }
-    if (author) {
-        query.author = { $regex: author, $options: "i" };
+    if (topic) {
+        query.topic = { $regex: topic, $options: "i" };
     }
     const skip = (parseInt(current) - 1) * parseInt(pageSize);
     const limit = parseInt(pageSize);
