@@ -71,7 +71,7 @@ export default function LayoutComp({ children }: { children: React.ReactNode }) 
             onClick={menuClick}
           />
         </Layout.Sider>
-        <Layout style={{ padding: '16px' }}>
+        <Layout style={{ padding: '16px', minHeight: 'calc(100vh - 64px)' }}>
           <Layout.Content
             style={{
               padding: 0,

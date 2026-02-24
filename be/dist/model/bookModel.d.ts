@@ -1,42 +1,27 @@
 import mongoose from "mongoose";
 declare const bookSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 }, mongoose.Document<unknown, {}, {
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 }, {
     id: string;
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -47,31 +32,21 @@ declare const bookSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
     [path: string]: mongoose.SchemaDefinitionProperty<undefined, any, any>;
 } | {
     [x: string]: mongoose.SchemaDefinitionProperty<any, any, mongoose.Document<unknown, {}, {
-        customData: any;
+        graphData: any;
         createdAt: string;
         updatedAt: string;
         name?: string | null;
         author?: string | null;
         description?: string | null;
-        topic?: string | null;
-        what?: string | null;
-        how?: string | null;
-        think?: string | null;
-        why?: string | null;
     }, {
         id: string;
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
-        customData: any;
+        graphData: any;
         createdAt: string;
         updatedAt: string;
         name?: string | null;
         author?: string | null;
         description?: string | null;
-        topic?: string | null;
-        what?: string | null;
-        how?: string | null;
-        think?: string | null;
-        why?: string | null;
     } & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -80,17 +55,12 @@ declare const bookSchema: mongoose.Schema<any, mongoose.Model<any, any, any, any
         id: string;
     }> | undefined;
 }, {
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

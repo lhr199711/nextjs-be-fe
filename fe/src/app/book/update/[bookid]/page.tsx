@@ -3,19 +3,22 @@ import bookApi from '@/api/book';
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
-import { Button, Flex, Table, Image, Dropdown, Space, Form, Input, message } from 'antd';
+import { Button, Flex, Table, Image, Dropdown, Space, Form, Input, message, Alert } from 'antd';
 import { useRouter } from 'next/navigation';
-import AntdGraph from './components/AntdGraph';
+import AntdGraph, { type AntdGraphRefHandle } from './components/AntdGraph';
+
 export default function UpdateBook() {
   const router = useRouter();
   const { bookid } = useParams();
   const [messageApi, contextHolder] = message.useMessage();
   const pageType = useMemo(() => (bookid === 'null' ? 'add' : 'update'), [bookid]);
   const [form] = Form.useForm();
-
+  const [data, setData] = useState<unknown>(null);
+  const childRef = useRef<AntdGraphRefHandle | null>(null);
   useEffect(() => {
     if (pageType === 'update' && bookid && typeof bookid === 'string') {
       bookApi.getBookDetail(bookid).then((res) => {
+        setData(res?.graphData || {});
         form.setFieldsValue(res);
       });
     }
@@ -31,10 +34,12 @@ export default function UpdateBook() {
           name="bookForm"
           autoComplete="off"
           onFinish={(values) => {
+            const graphData = childRef.current?.getGraphData();
             let payload;
             if (pageType === 'add') {
               payload = {
                 ...values,
+                graphData,
                 createdAt: new Date(),
                 updatedAt: new Date()
               };
@@ -42,7 +47,7 @@ export default function UpdateBook() {
               payload = {
                 ...values,
                 _id: bookid,
-                createdAt: new Date(),
+                graphData,
                 updatedAt: new Date()
               };
             }
@@ -74,7 +79,8 @@ export default function UpdateBook() {
             />
           </Form.Item>
           <Form.Item label="思维导图" name="description">
-            <AntdGraph />
+            <Alert title="alt+鼠标滚轮缩放" type="info" style={{ marginBottom: 10 }} />
+            <AntdGraph data={data} ref={childRef} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
             <Button type="primary" htmlType="submit">

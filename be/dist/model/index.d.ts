@@ -79,45 +79,30 @@ export declare const User: mongoose.Model<{
     __v: number;
 }>;
 export declare const Book: mongoose.Model<{
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 }, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -125,43 +110,28 @@ export declare const Book: mongoose.Model<{
 }, "id"> & {
     id: string;
 }, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 }, mongoose.Document<unknown, {}, {
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 }, {
     id: string;
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -172,31 +142,21 @@ export declare const Book: mongoose.Model<{
     [path: string]: mongoose.SchemaDefinitionProperty<undefined, any, any>;
 } | {
     [x: string]: mongoose.SchemaDefinitionProperty<any, any, mongoose.Document<unknown, {}, {
-        customData: any;
+        graphData: any;
         createdAt: string;
         updatedAt: string;
         name?: string | null;
         author?: string | null;
         description?: string | null;
-        topic?: string | null;
-        what?: string | null;
-        how?: string | null;
-        think?: string | null;
-        why?: string | null;
     }, {
         id: string;
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
-        customData: any;
+        graphData: any;
         createdAt: string;
         updatedAt: string;
         name?: string | null;
         author?: string | null;
         description?: string | null;
-        topic?: string | null;
-        what?: string | null;
-        how?: string | null;
-        think?: string | null;
-        why?: string | null;
     } & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -205,33 +165,23 @@ export declare const Book: mongoose.Model<{
         id: string;
     }> | undefined;
 }, {
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;
 }>, {
-    customData: any;
+    graphData: any;
     createdAt: string;
     updatedAt: string;
     name?: string | null;
     author?: string | null;
     description?: string | null;
-    topic?: string | null;
-    what?: string | null;
-    how?: string | null;
-    think?: string | null;
-    why?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

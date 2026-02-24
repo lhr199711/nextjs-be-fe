@@ -14,22 +14,7 @@ const bookSchema = new mongoose_1.default.Schema({
     description: {
         type: String,
     },
-    topic: {
-        type: String,
-    },
-    what: {
-        type: String,
-    },
-    how: {
-        type: String,
-    },
-    think: {
-        type: String,
-    },
-    why: {
-        type: String,
-    },
-    customData: {
+    graphData: {
         type: Object,
         default: () => ({}),
     },

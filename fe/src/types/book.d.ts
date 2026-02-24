@@ -3,11 +3,7 @@ export interface BookItem {
   name: string;
   author: string;
   description: string;
-  topic: string;
-  what: string;
-  how: string;
-  think: string;
-  why: string;
+  graphData: unknown;
   createdAt: string;
   updatedAt: string;
 }

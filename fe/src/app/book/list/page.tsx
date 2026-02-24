@@ -120,8 +120,36 @@ export default function Home() {
               </span>
             )
           },
-          { title: '创建时间', dataIndex: 'createdAt' },
-          { title: '更新时间', dataIndex: 'updatedAt' },
+          {
+            title: '创建时间',
+            dataIndex: 'createdAt',
+            render: (value: string) =>
+              value
+                ? new Date(value).toLocaleString('zh-CN', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                  })
+                : ''
+          },
+          {
+            title: '更新时间',
+            dataIndex: 'updatedAt',
+            render: (value: string) =>
+              value
+                ? new Date(value).toLocaleString('zh-CN', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                  })
+                : ''
+          },
           {
             title: 'Action',
             key: 'action',
