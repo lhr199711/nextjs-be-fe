@@ -4,6 +4,8 @@ import { useState, useMemo, useEffect } from 'react';
 import { Form, Input, Button, Card, message, Tabs } from 'antd';
 import { useRouter } from 'next/navigation';
 import { LoginRes, UserItem } from '@/types/user';
+import { useUserStore } from '@/store/useUserStore';
+import { UserStore } from '@/types/user';
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
@@ -11,7 +13,7 @@ export default function LoginPage() {
   const [form] = Form.useForm<UserItem>();
   const [messageApi, contextHolder] = message.useMessage();
   const [tabKey, setTabKey] = useState('login');
-
+  const setName = useUserStore((state: UserStore) => state.setName);
   const formItems = useMemo(() => {
     return tabKey === 'login'
       ? { name: '', password: '' }
@@ -47,6 +49,9 @@ export default function LoginPage() {
               type: 'success',
               content: '登录成功'
             });
+            if (values.name && setName) {
+              setName(values.name);
+            }
             router.push('/book/list');
           })
           .catch((err) => {

@@ -6,6 +6,8 @@ import styles from './layoutcomp.module.css';
 import { useRouter } from 'next/navigation';
 import { DownOutlined } from '@ant-design/icons';
 import api from '@/api/login';
+import { useUserStore } from '@/store/useUserStore';
+import { UserStore } from '@/types/user';
 
 const menuList: MenuProps['items'] = [
   {
@@ -20,6 +22,8 @@ const menuList: MenuProps['items'] = [
 
 export default function LayoutComp({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const name = useUserStore((state: UserStore) => state.name);
+
   const menuClick: MenuProps['onClick'] = (e) => {
     router.push(e.key);
   };
@@ -53,7 +57,7 @@ export default function LayoutComp({ children }: { children: React.ReactNode }) 
           >
             <a style={{ color: '#409eff' }} onClick={(e) => e.preventDefault()}>
               <Space>
-                admin
+                {name}
                 <DownOutlined />
               </Space>
             </a>

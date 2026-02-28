@@ -25,7 +25,8 @@ export default function UpdateBook() {
   }, [pageType, bookid, form]);
 
   return (
-    <div>
+    <>
+      {contextHolder}
       <PageHeader title={pageType === 'add' ? '新建书籍' : '编辑书籍'} />
       <div>
         <Form
@@ -53,7 +54,9 @@ export default function UpdateBook() {
             }
             bookApi.updateBook(payload).then(() => {
               messageApi.success('操作成功!');
-              router.back();
+              setTimeout(() => {
+                router.back();
+              }, 1000);
             });
           }}
         >
@@ -89,6 +92,6 @@ export default function UpdateBook() {
           </Form.Item>
         </Form>
       </div>
-    </div>
+    </>
   );
 }
